@@ -108,9 +108,13 @@ std::cout << "x_gpu:\n" << x_gpu << '\n';
 
 ---
 #### References:
+
 https://krshrimali.github.io/Setting-Up-Xeus-Cling-Libtorch-OpenCV/
+
 https://gist.github.com/vfdev-5/911c4b12c1958648b19ebdacae84e798
+
 https://github.com/pytorch/pytorch/blob/master/docs/libtorch.rst
+
 https://blog.csdn.net/weixin_43742643/article/details/114156298
 
 
