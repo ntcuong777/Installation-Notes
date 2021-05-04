@@ -325,6 +325,8 @@ int k = waitKey(0); // Wait for a keystroke in the window
 destroyAllWindows();
 ```
 
+The sample notebook can be reached at [here](https://github.com/phithangcung/Installation-Notes/blob/main/Archive/Hello-Libtorch-C%2B%2B14-OpenCV.ipynb)
+
 ---
 #### References:
 
