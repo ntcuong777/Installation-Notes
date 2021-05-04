@@ -1,3 +1,4 @@
+
 ﻿# Configure Jupyter Notebook for LibTorch (Torch on c++) with `xeus-cling`
 
 **Requirements**: Anaconda
@@ -75,35 +76,253 @@ $ jupyter notebook
 ```
 
 ```c++
+// We add include path and library path for OpenCV
+#pragma cling add_include_path("/usr/local/include/opencv4")
+#pragma cling add_include_path("/usr/local/include/opencv4/opencv2")
+#pragma cling add_library_path("/usr/local/lib")
+
+// We load lib for OpenCV
+#pragma cling load("libopencv_alphamat.so")
+#pragma cling load("libopencv_alphamat.so.4.5")
+#pragma cling load("libopencv_alphamat.so.4.5.2")
+#pragma cling load("libopencv_aruco.so")
+#pragma cling load("libopencv_aruco.so.4.5")
+#pragma cling load("libopencv_aruco.so.4.5.2")
+#pragma cling load("libopencv_bgsegm.so")
+#pragma cling load("libopencv_bgsegm.so.4.5")
+#pragma cling load("libopencv_bgsegm.so.4.5.2")
+#pragma cling load("libopencv_bioinspired.so")
+#pragma cling load("libopencv_bioinspired.so.4.5")
+#pragma cling load("libopencv_bioinspired.so.4.5.2")
+#pragma cling load("libopencv_calib3d.so")
+#pragma cling load("libopencv_calib3d.so.4.5")
+#pragma cling load("libopencv_calib3d.so.4.5.2")
+#pragma cling load("libopencv_ccalib.so")
+#pragma cling load("libopencv_ccalib.so.4.5")
+#pragma cling load("libopencv_ccalib.so.4.5.2")
+#pragma cling load("libopencv_core.so")
+#pragma cling load("libopencv_core.so.4.5")
+#pragma cling load("libopencv_core.so.4.5.2")
+#pragma cling load("libopencv_cudaarithm.so")
+#pragma cling load("libopencv_cudaarithm.so.4.5")
+#pragma cling load("libopencv_cudaarithm.so.4.5.2")
+#pragma cling load("libopencv_cudabgsegm.so")
+#pragma cling load("libopencv_cudabgsegm.so.4.5")
+#pragma cling load("libopencv_cudabgsegm.so.4.5.2")
+#pragma cling load("libopencv_cudafeatures2d.so")
+#pragma cling load("libopencv_cudafeatures2d.so.4.5")
+#pragma cling load("libopencv_cudafeatures2d.so.4.5.2")
+#pragma cling load("libopencv_cudafilters.so")
+#pragma cling load("libopencv_cudafilters.so.4.5")
+#pragma cling load("libopencv_cudafilters.so.4.5.2")
+#pragma cling load("libopencv_cudaimgproc.so")
+#pragma cling load("libopencv_cudaimgproc.so.4.5")
+#pragma cling load("libopencv_cudaimgproc.so.4.5.2")
+#pragma cling load("libopencv_cudalegacy.so")
+#pragma cling load("libopencv_cudalegacy.so.4.5")
+#pragma cling load("libopencv_cudalegacy.so.4.5.2")
+#pragma cling load("libopencv_cudaobjdetect.so")
+#pragma cling load("libopencv_cudaobjdetect.so.4.5")
+#pragma cling load("libopencv_cudaobjdetect.so.4.5.2")
+#pragma cling load("libopencv_cudaoptflow.so")
+#pragma cling load("libopencv_cudaoptflow.so.4.5")
+#pragma cling load("libopencv_cudaoptflow.so.4.5.2")
+#pragma cling load("libopencv_cudastereo.so")
+#pragma cling load("libopencv_cudastereo.so.4.5")
+#pragma cling load("libopencv_cudastereo.so.4.5.2")
+#pragma cling load("libopencv_cudawarping.so")
+#pragma cling load("libopencv_cudawarping.so.4.5")
+#pragma cling load("libopencv_cudawarping.so.4.5.2")
+#pragma cling load("libopencv_cudev.so")
+#pragma cling load("libopencv_cudev.so.4.5")
+#pragma cling load("libopencv_cudev.so.4.5.2")
+#pragma cling load("libopencv_datasets.so")
+#pragma cling load("libopencv_datasets.so.4.5")
+#pragma cling load("libopencv_datasets.so.4.5.2")
+#pragma cling load("libopencv_dnn.so")
+#pragma cling load("libopencv_dnn.so.4.5")
+#pragma cling load("libopencv_dnn.so.4.5.2")
+#pragma cling load("libopencv_dnn_objdetect.so")
+#pragma cling load("libopencv_dnn_objdetect.so.4.5")
+#pragma cling load("libopencv_dnn_objdetect.so.4.5.2")
+#pragma cling load("libopencv_dnn_superres.so")
+#pragma cling load("libopencv_dnn_superres.so.4.5")
+#pragma cling load("libopencv_dnn_superres.so.4.5.2")
+#pragma cling load("libopencv_dpm.so")
+#pragma cling load("libopencv_dpm.so.4.5")
+#pragma cling load("libopencv_dpm.so.4.5.2")
+#pragma cling load("libopencv_face.so")
+#pragma cling load("libopencv_face.so.4.5")
+#pragma cling load("libopencv_face.so.4.5.2")
+#pragma cling load("libopencv_features2d.so")
+#pragma cling load("libopencv_features2d.so.4.5")
+#pragma cling load("libopencv_features2d.so.4.5.2")
+#pragma cling load("libopencv_flann.so")
+#pragma cling load("libopencv_flann.so.4.5")
+#pragma cling load("libopencv_flann.so.4.5.2")
+#pragma cling load("libopencv_freetype.so")
+#pragma cling load("libopencv_freetype.so.4.5")
+#pragma cling load("libopencv_freetype.so.4.5.2")
+#pragma cling load("libopencv_fuzzy.so")
+#pragma cling load("libopencv_fuzzy.so.4.5")
+#pragma cling load("libopencv_fuzzy.so.4.5.2")
+#pragma cling load("libopencv_gapi.so")
+#pragma cling load("libopencv_gapi.so.4.5")
+#pragma cling load("libopencv_gapi.so.4.5.2")
+#pragma cling load("libopencv_hdf.so")
+#pragma cling load("libopencv_hdf.so.4.5")
+#pragma cling load("libopencv_hdf.so.4.5.2")
+#pragma cling load("libopencv_hfs.so")
+#pragma cling load("libopencv_hfs.so.4.5")
+#pragma cling load("libopencv_hfs.so.4.5.2")
+#pragma cling load("libopencv_highgui.so")
+#pragma cling load("libopencv_highgui.so.4.5")
+#pragma cling load("libopencv_highgui.so.4.5.2")
+#pragma cling load("libopencv_img_hash.so")
+#pragma cling load("libopencv_img_hash.so.4.5")
+#pragma cling load("libopencv_img_hash.so.4.5.2")
+#pragma cling load("libopencv_imgcodecs.so")
+#pragma cling load("libopencv_imgcodecs.so.4.5")
+#pragma cling load("libopencv_imgcodecs.so.4.5.2")
+#pragma cling load("libopencv_imgproc.so")
+#pragma cling load("libopencv_imgproc.so.4.5")
+#pragma cling load("libopencv_imgproc.so.4.5.2")
+#pragma cling load("libopencv_intensity_transform.so")
+#pragma cling load("libopencv_intensity_transform.so.4.5")
+#pragma cling load("libopencv_intensity_transform.so.4.5.2")
+#pragma cling load("libopencv_line_descriptor.so")
+#pragma cling load("libopencv_line_descriptor.so.4.5")
+#pragma cling load("libopencv_line_descriptor.so.4.5.2")
+#pragma cling load("libopencv_mcc.so")
+#pragma cling load("libopencv_mcc.so.4.5")
+#pragma cling load("libopencv_mcc.so.4.5.2")
+#pragma cling load("libopencv_ml.so")
+#pragma cling load("libopencv_ml.so.4.5")
+#pragma cling load("libopencv_ml.so.4.5.2")
+#pragma cling load("libopencv_objdetect.so")
+#pragma cling load("libopencv_objdetect.so.4.5")
+#pragma cling load("libopencv_objdetect.so.4.5.2")
+#pragma cling load("libopencv_optflow.so")
+#pragma cling load("libopencv_optflow.so.4.5")
+#pragma cling load("libopencv_optflow.so.4.5.2")
+#pragma cling load("libopencv_phase_unwrapping.so")
+#pragma cling load("libopencv_phase_unwrapping.so.4.5")
+#pragma cling load("libopencv_phase_unwrapping.so.4.5.2")
+#pragma cling load("libopencv_photo.so")
+#pragma cling load("libopencv_photo.so.4.5")
+#pragma cling load("libopencv_photo.so.4.5.2")
+#pragma cling load("libopencv_plot.so")
+#pragma cling load("libopencv_plot.so.4.5")
+#pragma cling load("libopencv_plot.so.4.5.2")
+#pragma cling load("libopencv_quality.so")
+#pragma cling load("libopencv_quality.so.4.5")
+#pragma cling load("libopencv_quality.so.4.5.2")
+#pragma cling load("libopencv_rapid.so")
+#pragma cling load("libopencv_rapid.so.4.5")
+#pragma cling load("libopencv_rapid.so.4.5.2")
+#pragma cling load("libopencv_reg.so")
+#pragma cling load("libopencv_reg.so.4.5")
+#pragma cling load("libopencv_reg.so.4.5.2")
+#pragma cling load("libopencv_rgbd.so")
+#pragma cling load("libopencv_rgbd.so.4.5")
+#pragma cling load("libopencv_rgbd.so.4.5.2")
+#pragma cling load("libopencv_saliency.so")
+#pragma cling load("libopencv_saliency.so.4.5")
+#pragma cling load("libopencv_saliency.so.4.5.2")
+#pragma cling load("libopencv_sfm.so")
+#pragma cling load("libopencv_sfm.so.4.5")
+#pragma cling load("libopencv_sfm.so.4.5.2")
+#pragma cling load("libopencv_shape.so")
+#pragma cling load("libopencv_shape.so.4.5")
+#pragma cling load("libopencv_shape.so.4.5.2")
+#pragma cling load("libopencv_stereo.so")
+#pragma cling load("libopencv_stereo.so.4.5")
+#pragma cling load("libopencv_stereo.so.4.5.2")
+#pragma cling load("libopencv_stitching.so")
+#pragma cling load("libopencv_stitching.so.4.5")
+#pragma cling load("libopencv_stitching.so.4.5.2")
+#pragma cling load("libopencv_structured_light.so")
+#pragma cling load("libopencv_structured_light.so.4.5")
+#pragma cling load("libopencv_structured_light.so.4.5.2")
+#pragma cling load("libopencv_superres.so")
+#pragma cling load("libopencv_superres.so.4.5")
+#pragma cling load("libopencv_superres.so.4.5.2")
+#pragma cling load("libopencv_surface_matching.so")
+#pragma cling load("libopencv_surface_matching.so.4.5")
+#pragma cling load("libopencv_surface_matching.so.4.5.2")
+#pragma cling load("libopencv_text.so")
+#pragma cling load("libopencv_text.so.4.5")
+#pragma cling load("libopencv_text.so.4.5.2")
+#pragma cling load("libopencv_tracking.so")
+#pragma cling load("libopencv_tracking.so.4.5")
+#pragma cling load("libopencv_tracking.so.4.5.2")
+#pragma cling load("libopencv_video.so")
+#pragma cling load("libopencv_video.so.4.5")
+#pragma cling load("libopencv_video.so.4.5.2")
+#pragma cling load("libopencv_videoio.so")
+#pragma cling load("libopencv_videoio.so.4.5")
+#pragma cling load("libopencv_videoio.so.4.5.2")
+#pragma cling load("libopencv_videostab.so")
+#pragma cling load("libopencv_videostab.so.4.5")
+#pragma cling load("libopencv_videostab.so.4.5.2")
+#pragma cling load("libopencv_wechat_qrcode.so")
+#pragma cling load("libopencv_wechat_qrcode.so.4.5")
+#pragma cling load("libopencv_wechat_qrcode.so.4.5.2")
+#pragma cling load("libopencv_xfeatures2d.so")
+#pragma cling load("libopencv_xfeatures2d.so.4.5")
+#pragma cling load("libopencv_xfeatures2d.so.4.5.2")
+#pragma cling load("libopencv_ximgproc.so")
+#pragma cling load("libopencv_ximgproc.so.4.5")
+#pragma cling load("libopencv_ximgproc.so.4.5.2")
+#pragma cling load("libopencv_xobjdetect.so")
+#pragma cling load("libopencv_xobjdetect.so.4.5")
+#pragma cling load("libopencv_xobjdetect.so.4.5.2")
+#pragma cling load("libopencv_xphoto.so")
+#pragma cling load("libopencv_xphoto.so.4.5")
+#pragma cling load("libopencv_xphoto.so.4.5.2")
+```
+
+```c++
 #include <torch/torch.h>
+
+#include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
+
 #include <iostream>
 ```
 ```c++
-//////////////////////////////////////////////////////////////
-std::cout << "Deep Learning with PyTorch: A 60 Minute Blitz\n\n";
-std::cout << "What is PyTorch?\n\n";
-
 /*************************************************
  * TENSOR DECLARATION *
  *************************************************/
 std::cout << "Tensors\n\n";
 
-// Construct a 5x3 matrix, uninitialized:
-auto x = torch::empty({5, 3});
-std::cout << "x:\n" << x << '\n';
-
 // Construct a randomly initialized matrix:
-x = torch::rand({5, 3});
-std::cout << "x:\n" << x << '\n';
-```
-```c++
+auto tensor_cpu = torch::rand({5, 3});
+std::cout << "tensor_cpu:\n" << tensor_cpu << "\n\n";
+
 // Device: Test CUDA in GPU
 auto cuda_available = torch::cuda::is_available();
 torch::Device device(cuda_available ? torch::kCUDA : torch::kCPU);
-std::cout << (cuda_available ? "CUDA available. Training on GPU." : "Training on CPU.") << '\n';
+std::cout << (cuda_available ? "CUDA available. Training on GPU." : "Training on CPU.") << "\n\n";
 
-auto x_gpu = torch::rand({5, 3}).to(device);
-std::cout << "x_gpu:\n" << x_gpu << '\n';
+auto tensor_gpu = tensor_cpu.to(device);
+std::cout << "tensor_gpu:\n" << tensor_gpu << '\n';
+```
+```c++
+using namespace cv;
+
+// test opencv read and show image
+std::string image_path = "image.jpeg";
+Mat img = imread(image_path, IMREAD_COLOR);
+if(img.empty())
+{
+    std::cout << "Could not read the image: " << image_path << std::endl;
+    return 1;
+}
+imshow("Display window", img);
+int k = waitKey(0); // Wait for a keystroke in the window
+destroyAllWindows();
 ```
 
 ---
