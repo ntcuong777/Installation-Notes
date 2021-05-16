@@ -1,5 +1,5 @@
 
-> I owned [Nhat Chung](https://github.com/nhatchung14) and [handsome Cuong Nguyen](https://github.com/ntcuong777) a big thank for their seminar and their support.
+> I owed [Nhat Chung](https://github.com/nhatchung14) and [handsome Cuong Nguyen](https://github.com/ntcuong777) a big thank for their seminar and their support.
 
 
 # Setup Docker on Ubuntu/Debian-based:
