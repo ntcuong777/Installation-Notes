@@ -40,7 +40,7 @@ Now, we will do uploading this file back to Google Drive
 
 ![](https://miro.medium.com/max/700/1*q4O5zivox7I3vvF2rMdGag.png)
 
-- This generates a  `client id`  and a  `client seacret`  .
+- This generates a  `client id`  and a  `client secret`  .
 
 > **Note**:  This is your **username** and **password** so copy it somewhere secure.
 
@@ -87,6 +87,9 @@ The output should be in the format:
 
 
 **Notice**: Now, you need to note down
+- **client id**
+- **client secret**
+- **device code**
 - **access_token**
 
 ### 2.4 Upload files
@@ -107,5 +110,41 @@ $ curl -X POST -L \
 
 - Here  _multipart_  files are expected to only be a couple of MB in size. However if you are looking at moving larger files  _resumable_ may be better suited (see  [https://developers.google.com/drive/api/v3/manage-uploads](https://developers.google.com/drive/api/v3/manage-uploads)  )
 
+## QUICK NOTE:
 
+```
+########################################################################
+# INIT GDRIVE API ---> GET ID+SECRET AS USR+PWD
+########################################################################
+
+clientid="736271750888-ivoj4md6aaikpiltc88as4ku2hhcfib7.apps.googleusercontent.com"
+clientsecret="gwHo81B8R-HCMcsiRBBc-yiZ"
+
+########################################################################
+# GENERATE DEVICE CODE
+########################################################################
+
+curl -d "client_id=${clientid}&scope=https://www.googleapis.com/auth/drive.file" https://oauth2.googleapis.com/device/code
+
+# copy user_code, verify at <https://www.google.com/device>
+# note down the device_code value:
+
+devicecode=""
+
+########################################################################
+# GENERATE ACCESS TOKEN
+########################################################################
+curl -d client_id=${clientid} -d client_secret=${clientsecret} -d device_code=${devicecode} -d grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code https://accounts.google.com/o/oauth2/token
+
+# note down the access_token value:
+
+accesstoken=""
+filename=""
+
+curl -X POST -L \
+    -H "Authorization: Bearer ${accesstoken}" \
+    -F "metadata={name :'${filename}'};type=application/json;charset=UTF-8" \
+    -F "file=@${filename};type=application/zip" \
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
+```
 
