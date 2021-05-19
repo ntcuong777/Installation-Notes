@@ -1,4 +1,4 @@
-﻿# This note present how to download/upload file from/to Google Drive with terminal
+# This note present how to download/upload file from/to Google Drive with terminal
 
 ## 0. Install cURL
 We use cURL to perform these operations. Install cURL:
@@ -87,9 +87,6 @@ The output should be in the format:
 
 
 **Notice**: Now, you need to note down
-- **client id**
-- **client secret**
-- **device code**
 - **access_token**
 
 ### 2.4 Upload files
@@ -97,7 +94,6 @@ Go to [https://console.cloud.google.com/apis/api/drive.googleapis.com/overview](
 
 The command we use to upload files is given below:
 - replace `<enter access token here>` with your `access_token`
-- replace `<client secret>` with your `client secret`
 - replace two `<our.zip>` with your `file_name` you need to upload
 ```
 $ curl -X POST -L \  
@@ -110,7 +106,6 @@ $ curl -X POST -L \
 - _Here you may need to enable the app API before being allowed to upload data. The link to do this is given in the error message if this is the case._
 
 - Here  _multipart_  files are expected to only be a couple of MB in size. However if you are looking at moving larger files  _resumable_ may be better suited (see  [https://developers.google.com/drive/api/v3/manage-uploads](https://developers.google.com/drive/api/v3/manage-uploads)  )
-
 
 
 
