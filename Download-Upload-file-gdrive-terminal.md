@@ -18,8 +18,11 @@ We use this command at terminal (replace the appropriate file-name and file-id i
 $ fileid="my-file-name"
 $ filename="my-file-id"
 
-$ curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}" > /dev/null
-$ curl -Lb ./cookie "https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" -o ${filename}
+$ curl -c ./cookie -s -L \
+	"https://drive.google.com/uc?export=download&id=${fileid}" > /dev/null
+$ curl -Lb ./cookie \
+	"https://drive.google.com/uc?export=download&confirm=`awk '/download/ {print $NF}' ./cookie`&id=${fileid}" \
+	-o ${filename}
 ```
 
 ## 2. Upload file to Google Drive
@@ -47,7 +50,9 @@ Now, we will do uploading this file back to Google Drive
 ### 2.2 Verify the device (do this once on each of your device)
 To do this we `ssh` into the machine we wish to upload from and run the following command (**Note**: replace `<client_id>` with your `client_id`):
 ```
-$ curl -d "client_id=<client_id>&scope=https://www.googleapis.com/auth/drive.file" https://oauth2.googleapis.com/device/code
+$ curl -d \
+	"client_id=<client_id>&scope=https://www.googleapis.com/auth/drive.file" \
+	https://oauth2.googleapis.com/device/code
 ```
 - We get a response in the following format
 ```
@@ -71,7 +76,11 @@ When we start uploading, this is the code we shall need to use to identify our a
 - replace `<client secret>` with your `client secret`
 - replace `<device code>` with your `device code`
 ```
-$ curl -d client_id=<client id> -d client_secret=<client secret> -d device_code=<device code> -d grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code https://accounts.google.com/o/oauth2/token
+$ curl -d client_id=<client id> \
+	-d client_secret=<client secret> \
+	-d device_code=<device code> \
+	-d grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code \
+	https://accounts.google.com/o/oauth2/token
 ```
 
 The output should be in the format:
@@ -117,14 +126,16 @@ $ curl -X POST -L \
 # INIT GDRIVE API ---> GET ID+SECRET AS USR+PWD
 ########################################################################
 
-clientid="736271750888-ivoj4md6aaikpiltc88as4ku2hhcfib7.apps.googleusercontent.com"
-clientsecret="gwHo81B8R-HCMcsiRBBc-yiZ"
+clientid=""
+clientsecret=""
 
 ########################################################################
 # GENERATE DEVICE CODE
 ########################################################################
 
-curl -d "client_id=${clientid}&scope=https://www.googleapis.com/auth/drive.file" https://oauth2.googleapis.com/device/code
+curl -d \
+	"client_id=${clientid}&scope=https://www.googleapis.com/auth/drive.file" \
+	https://oauth2.googleapis.com/device/code
 
 # copy user_code, verify at <https://www.google.com/device>
 # note down the device_code value:
@@ -134,7 +145,11 @@ devicecode=""
 ########################################################################
 # GENERATE ACCESS TOKEN
 ########################################################################
-curl -d client_id=${clientid} -d client_secret=${clientsecret} -d device_code=${devicecode} -d grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code https://accounts.google.com/o/oauth2/token
+curl -d client_id=${clientid} \
+	-d client_secret=${clientsecret} \
+	-d device_code=${devicecode} \
+	-d grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Adevice_code \
+	https://accounts.google.com/o/oauth2/token
 
 # note down the access_token value:
 
@@ -142,7 +157,7 @@ accesstoken=""
 filename=""
 
 curl -X POST -L \
-    -H "Authorization: Bearer ${accesstoken}" \
+	-H "Authorization: Bearer ${accesstoken}" \
     -F "metadata={name :'${filename}'};type=application/json;charset=UTF-8" \
     -F "file=@${filename};type=application/zip" \
     "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
