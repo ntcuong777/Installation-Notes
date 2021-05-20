@@ -80,6 +80,7 @@ We run the Docker image as following sample command:
 ```
 $ docker run -it --gpus all \
 	-v /home/hung/Documents/docker-workspace/10.1-devel-ubuntu18.04/workspace:/home/workspace \
+        --shm-size=<shared-memory-size> \
 	--name container-1.0 \
 	phithangcung/10.1-cudnn7-ubuntu18.04:1.0
 ```
@@ -87,6 +88,7 @@ The general syntax is:
 ```
 $ docker run -it --gpus all \
     -v <machine folder>:<container folder> \
+    --shm-size=<shared-memory-size> \
     -p 8888:8888 -p xxxxx:yyyyy \
     -name <container-name> \
     <docker-image>
@@ -105,6 +107,7 @@ g531/unix:  MIT-MAGIC-COOKIE-1  d323cfe33a738d7f078b7d984b760a83
 ```
 $ docker run -it --gpus all \
 	-v /home/hung/Documents/docker-workspace/10.1-devel-ubuntu18.04/workspace:/home/workspace \
+        --shm-size=<shared-memory-size> \
 	--net=host -e DISPLAY -v /tmp/.X11-unix \
 	--name container-1.0 \
 	phithangcung/10.1-cudnn7-ubuntu18.04:1.0
