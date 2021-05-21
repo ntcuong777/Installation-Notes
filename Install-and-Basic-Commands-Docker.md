@@ -76,11 +76,12 @@ There are some flags that we need to refer:
 + `-p` for port mapping
 + `--name` to indicate the name of container
 
-We run the Docker image as following sample command:
+We run the Docker image as following a sample command:
+Note: remember to initialize the shared memory size !! More references on shared-memory size can be reach at [here](https://github.com/Project-OSRM/osrm-backend/wiki/Configuring-and-using-Shared-Memory)
 ```
 $ docker run -it --gpus all \
 	-v /home/hung/Documents/docker-workspace/10.1-devel-ubuntu18.04/workspace:/home/workspace \
-        --shm-size=<shared-memory-size> \
+        --shm-size=64g \
 	--name container-1.0 \
 	phithangcung/10.1-cudnn7-ubuntu18.04:1.0
 ```
@@ -94,6 +95,14 @@ $ docker run -it --gpus all \
     <docker-image>
 ```
 
+We can check the shared memory size as:
+```
+$ df -h /dev/shm /var/shm /run/shm
+df: '/var/shm': No such file or directory
+df: '/run/shm': No such file or directory
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs            20G  504K   20G   1% /dev/shm
+```
 
 ## Link docker container display to host machine:
 
