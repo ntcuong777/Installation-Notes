@@ -101,11 +101,11 @@ Include the libs in your environment
     
 **REMAKR**: If you use another CMAKE_INSTALL_PREFIX for your OpenCV installation, remember to do the following:
 
-    ```
-    echo 'export CPATH=/path/to/your/install/dir/include/opencv4/' > ~/.bashrc
-    echo 'export PKG_CONFIG_PATH=/path/to/your/install/dir/lib/pkgconfig/' > ~/.bashrc
-    source ~/.bashrc
-    ```
+```
+echo 'export CPATH=/path/to/your/install/dir/include/opencv4/' > ~/.bashrc # This helps GCC find your OpenCV include headers 
+echo 'export PKG_CONFIG_PATH=/path/to/your/install/dir/lib/pkgconfig/' > ~/.bashrc # This helps GCC finds all the static library of OpenCV
+source ~/.bashrc
+```
 
 ### EXAMPLE TO TEST OPENCV 4.2.0 with GPU in C++
 
