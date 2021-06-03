@@ -1,10 +1,11 @@
+
 # How to install OpenCV 4.x for C++ with CUDA in Ubuntu 18.04
 
 First of all install update and upgrade your system:
-    
-        $ sudo apt update
-        $ sudo apt upgrade
-   
+```    
+ $ sudo apt update
+ $ sudo apt upgrade
+```
     
 Then, install required libraries:   
 
@@ -77,6 +78,15 @@ Then, install required libraries:
 --     NVIDIA PTX archs:
 
 ```
+**Make a build for multiple CUDA CC**: We replace
+```
+        -D CUDA_ARCH_BIN=6.1 \
+```
+with
+```
+        -DCUDA_ARCH_BIN=6.0,6.1,7.0,7.5 \
+```
+
 
 If it is fine proceed with the compilation (Use nproc to know the number of cpu cores):
     
@@ -176,6 +186,8 @@ Compile and execute:
     $ g++ test.cpp `pkg-config opencv --cflags --libs` -o test
     $ ./test
 
+---
+# APPENDIX
 
 ### List of documented problems
 
