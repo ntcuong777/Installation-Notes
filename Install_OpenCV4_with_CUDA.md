@@ -98,7 +98,15 @@ Include the libs in your environment
     
     $ sudo /bin/bash -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
     $ sudo ldconfig
-  
+    
+**REMAKR**: If you use another CMAKE_INSTALL_PREFIX for your OpenCV installation, remember to do the following:
+
+`
+    echo 'export CPATH=/path/to/your/install/dir/include/opencv4/' > ~/.bashrc
+    echo 'export PKG_CONFIG_PATH=/path/to/your/install/dir/lib/pkgconfig/' > ~/.bashrc
+    source ~/.bashrc
+`
+
 ### EXAMPLE TO TEST OPENCV 4.2.0 with GPU in C++
 
 Verify the installation by compiling and executing the following example:
